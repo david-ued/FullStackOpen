@@ -33,7 +33,7 @@ const App = () => {
       number: newNumber,
     }
 
-    const duplicatedPerson = persons.find( person => JSON.stringify(person.name) === JSON.stringify(newName))
+    const duplicatedPerson = persons? persons.find( person => JSON.stringify(person.name) === JSON.stringify(newName)) :[]
 
     if (duplicatedPerson){
       //implement the
