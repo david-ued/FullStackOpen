@@ -68,6 +68,10 @@ const App = () => {
       .deletePerson(id)
       .then(returnedPerson =>{
         setPersons(persons.filter(person => person.id != returnedPerson.id ))
+      })
+      .catch(error =>{
+        setErrorMessage(`Information of ${name} has already been removed from server`)
+        setPersons(persons.filter(person => person.id != id ))
       })    
     }
   }
@@ -87,10 +91,15 @@ const App = () => {
 
   const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchTerm) )
 
+  if (!persons) { 
+    return null 
+  }
+  
   return (
     <div>
       <h2>Phonebook</h2>
         <Notification message={successMessage} status ='success'/>
+        <Notification message={errorMessage} status ='error'/>
         <Filter input={searchTerm} handleInput = {handleSearchTerm} />
       <h3>Add a new person</h3>
         <PersonForm 
