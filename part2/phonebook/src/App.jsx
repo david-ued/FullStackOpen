@@ -67,7 +67,8 @@ const App = () => {
       personService
       .deletePerson(id)
       .then(returnedPerson =>{
-        setPersons(persons.filter(person => person.id != returnedPerson.id ))
+        console.log("the list should get updated")
+        setPersons(persons.filter(person => person.id != id ))
       })
       .catch(error =>{
         setErrorMessage(`Information of ${name} has already been removed from server`)
