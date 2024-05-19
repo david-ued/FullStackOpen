@@ -16,7 +16,6 @@ const App = () => {
   const [successMessage, setSuccessMessage] = useState(null)
 
 
-
   useEffect (() => {
     personService
       .getAll()
@@ -59,6 +58,11 @@ const App = () => {
           }, 2000)
           setPersons(persons.concat(returnedPerson))
         })
+        .catch(error => {
+          // this is the way to access the error message
+          console.log(error.response.data.error)
+          setErrorMessage(String(error.response.data.error))
+        })
     }
   }
 
@@ -98,7 +102,7 @@ const App = () => {
   
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2>Phonebook~</h2>
         <Notification message={successMessage} status ='success'/>
         <Notification message={errorMessage} status ='error'/>
         <Filter input={searchTerm} handleInput = {handleSearchTerm} />
